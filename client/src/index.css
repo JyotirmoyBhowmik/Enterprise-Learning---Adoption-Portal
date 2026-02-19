@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+ * GLOBAL STYLES: Lumina Learning & Adoption Suite
+ * LEAD ARCHITECT: Jyotirmoy Bhowmik
+ * Design Language: Enterprise Minimalist — Dark Navy + Glassmorphism
+ * ============================================================================ */
+
+:root {
+  --color-bg-primary: #020617;
+  --color-bg-secondary: #0f172a;
+  --color-bg-card: rgba(15, 23, 42, 0.7);
+  --color-border: rgba(148, 163, 184, 0.1);
+  --color-border-hover: rgba(52, 120, 255, 0.3);
+  --color-accent: #3478ff;
+  --color-accent-secondary: #8b5cf6;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(148, 163, 184, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Glassmorphism utility */
+@layer components {
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl border transition-all duration-300;
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 120, 255, 0.06);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  }
+
+  .btn-primary {
+    @apply px-6 py-2.5 rounded-xl font-semibold text-white text-sm transition-all duration-300;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-secondary));
+    box-shadow: 0 4px 15px rgba(52, 120, 255, 0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px rgba(52, 120, 255, 0.35);
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 border;
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+    background: transparent;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-accent);
+    background: rgba(52, 120, 255, 0.05);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent font-bold;
+    background-image: linear-gradient(135deg, #3478ff, #8b5cf6, #06b6d4);
+  }
+
+  .section-heading {
+    @apply text-2xl md:text-3xl font-bold mb-2 tracking-tight;
+  }
+
+  .section-subheading {
+    @apply text-base md:text-lg font-normal;
+    color: var(--color-text-secondary);
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background: rgba(52, 120, 255, 0.1);
+    color: #599eff;
+    border: 1px solid rgba(52, 120, 255, 0.15);
+  }
+
+  .badge-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border-color: rgba(34, 197, 94, 0.15);
+  }
+
+  .badge-warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.15);
+  }
+}
+
+/* Background mesh gradient */
+.bg-mesh {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(52, 120, 255, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.05), transparent),
+    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(6, 182, 212, 0.04), transparent);
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(52, 120, 255, 0.3), rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}

@@ -1,0 +1,22 @@
+{
+    "name": "lumina-server",
+    "version": "1.0.0",
+    "description": "Lumina Learning & Adoption Suite — Backend API",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "node --watch src/index.js",
+        "seed": "node src/seed.js"
+    },
+    "dependencies": {
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.1",
+        "express": "^4.18.2",
+        "express-validator": "^7.0.1",
+        "firebase-admin": "^12.0.0",
+        "helmet": "^7.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "morgan": "^1.10.0"
+    }
+}
