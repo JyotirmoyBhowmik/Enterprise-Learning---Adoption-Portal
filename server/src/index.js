@@ -67,7 +67,21 @@ app.use((err, _req, res, _next) => {
     });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`\n✦  Lumina Learning Suite API running on http://localhost:${PORT}`);
-    console.log(`   Environment: ${process.env.NODE_ENV || 'development'}\n`);
+    console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+
+    // Auto-seed demo data when running in-memory (no Firebase)
+    const { db } = require('./config/firebase');
+    if (!db) {
+        const { createRepository } = require('./repositories/repositoryFactory');
+        const catRepo = createRepository('categories');
+        const existing = await catRepo.getAll();
+        if (existing.length === 0) {
+            console.log('   Auto-seeding demo data...');
+            const { seed } = require('./seed');
+            await seed();
+        }
+    }
+    console.log('');
 });

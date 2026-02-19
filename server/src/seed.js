@@ -162,10 +162,13 @@ async function seed() {
     console.log('\n✦  Seed complete!\n');
 }
 
-// If run directly
-seed().catch(err => {
-    console.error('Seed failed:', err);
-    process.exit(1);
-});
+// If run directly (not imported as module)
+if (require.main === module) {
+    seed().catch(err => {
+        console.error('Seed failed:', err);
+        process.exit(1);
+    });
+}
 
 module.exports = { seed, categories, modules, lessons };
+
