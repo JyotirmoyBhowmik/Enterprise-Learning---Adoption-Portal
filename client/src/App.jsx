@@ -14,31 +14,61 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import CategoryDetail from './pages/CategoryDetail';
 import ModuleDetail from './pages/ModuleDetail';
-import LessonPage from './pages/LessonPage';
 import AISandbox from './pages/AISandbox';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Sidebar from './components/Sidebar';
+import ProtectedRoute from './components/ProtectedRoute'; // Assuming this component exists for protected routes
+import LearnModule from './pages/LearnModule'; // New rich content viewer
+import AdminDashboard from './pages/admin/AdminDashboard'; // Admin CMS
 
 export default function App() {
     return (
-        <AuthProvider>
-            <Router>
-                <div className="flex flex-col min-h-screen bg-surface-950">
-                    <Navbar />
-                    <main className="flex-1">
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/category/:id" element={<CategoryDetail />} />
-                            <Route path="/module/:id" element={<ModuleDetail />} />
-                            <Route path="/lesson/:id" element={<LessonPage />} />
-                            <Route path="/ai-sandbox" element={<AISandbox />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/profile" element={<Profile />} />
-                        </Routes>
-                    </main>
-                    <Footer />
+        <Router>
+            <AuthProvider>
+                <div className="flex h-screen bg-surface-muted overflow-hidden">
+                    {/* Left Navigation */}
+                    <Sidebar />
+
+                    {/* Main Content Area */}
+                    <div className="flex-1 flex flex-col h-full overflow-hidden relative">
+                        {/* Top Bar Navigation */}
+                        <Navbar />
+
+                        {/* Scrollable Page Content */}
+                        <main className="flex-1 overflow-y-auto">
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/category/:id" element={<CategoryDetail />} />
+                                <Route path="/module/:id" element={<ModuleDetail />} />
+
+                                {/* Protected Routes */}
+                                <Route path="/module/:id/learn" element={
+                                    <ProtectedRoute><LearnModule /></ProtectedRoute>
+                                } />
+                                <Route path="/ai-sandbox" element={
+                                    <ProtectedRoute><AISandbox /></ProtectedRoute>
+                                } />
+                                <Route path="/profile" element={
+                                    <ProtectedRoute><Profile /></ProtectedRoute>
+                                } />
+
+                                {/* Admin Routes (Role Guarded) */}
+                                <Route path="/admin/*" element={
+                                    <ProtectedRoute requiredRole="admin">
+                                        <AdminDashboard />
+                                    </ProtectedRoute>
+                                } />
+
+                                {/* Auth */}
+                                <Route path="/login" element={<Login />} />
+                            </Routes>
+
+                            <Footer />
+                        </main>
+                    </div>
                 </div>
-            </Router>
-        </AuthProvider>
+            </AuthProvider>
+        </Router>
     );
 }

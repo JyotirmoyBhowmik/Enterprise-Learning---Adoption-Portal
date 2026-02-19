@@ -25,6 +25,7 @@ const moduleRoutes = require('./routes/modules');
 const lessonRoutes = require('./routes/lessons');
 const authRoutes = require('./routes/auth');
 const progressRoutes = require('./routes/progress');
+const chatRoutes = require('./routes/chat');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -49,6 +50,7 @@ app.use('/api/modules', moduleRoutes);
 app.use('/api/lessons', lessonRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/progress', progressRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {

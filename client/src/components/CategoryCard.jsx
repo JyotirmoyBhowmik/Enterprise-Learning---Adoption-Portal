@@ -48,35 +48,27 @@ export default function CategoryCard({ category, index }) {
     return (
         <Link
             to={`/category/${category.id}`}
-            className="glass-card group p-6 cursor-pointer animate-fade-in"
-            style={{ animationDelay: `${index * 100}ms` }}
+            className="white-card p-6 block hover:-translate-y-1 hover:shadow-md transition-all duration-300 group"
         >
-            {/* Gradient glow behind icon */}
-            <div className="absolute top-0 right-0 w-32 h-32 opacity-10 group-hover:opacity-20 transition-opacity duration-500 rounded-full blur-2xl"
-                style={{ background: category.color }} />
-
-            {/* Icon */}
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 shadow-sm"
                 style={{ background: `${category.color}15`, color: category.color }}>
                 {icon}
             </div>
 
             {/* Content */}
-            <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-lumina-400 transition-colors">
+            <h3 className="text-xl font-bold text-text mb-2 group-hover:text-lumina-600 transition-colors">
                 {category.name}
             </h3>
-            <p className="text-sm text-slate-400 leading-relaxed mb-4 line-clamp-2">
+
+            <p className="text-sm text-text-muted line-clamp-2 mb-4">
                 {category.description}
             </p>
 
-            {/* Footer */}
-            <div className="flex items-center justify-between">
-                <span className="badge">
-                    {category.moduleCount || 0} modules
+            <div className="flex items-center text-sm font-medium text-lumina-600">
+                <span>{category.moduleCount || 0} Modules</span>
+                <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
+                    →
                 </span>
-                <svg className="w-5 h-5 text-slate-500 group-hover:text-lumina-400 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
             </div>
         </Link>
     );

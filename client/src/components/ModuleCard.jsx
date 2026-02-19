@@ -20,40 +20,39 @@ export default function ModuleCard({ module, index }) {
     return (
         <Link
             to={`/module/${module.id}`}
-            className="glass-card group p-6 cursor-pointer animate-fade-in"
-            style={{ animationDelay: `${index * 80}ms` }}
+            className="white-card p-6 block hover:-translate-y-1 hover:shadow-md transition-all duration-300 group"
         >
-            <div className="flex items-start justify-between mb-3">
-                <span
-                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
-                    style={{ background: colors.bg, color: colors.text, border: `1px solid ${colors.border}` }}
-                >
+            <div className="flex justify-between items-start mb-4">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                    style={{ background: colors.bg, color: colors.text, border: `1px solid ${colors.border}` }}>
                     {module.difficulty}
                 </span>
-                <span className="text-xs text-slate-500 flex items-center gap-1">
+
+                <span className="text-xs text-text-muted flex items-center gap-1 bg-surface-muted px-2 py-1 rounded-md">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    {module.duration}
+                    {module.duration || '30 min'}
                 </span>
             </div>
 
-            <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-lumina-400 transition-colors">
+            <h3 className="text-lg font-bold text-text mb-2 group-hover:text-lumina-600 transition-colors line-clamp-1">
                 {module.title}
             </h3>
-            <p className="text-sm text-slate-400 leading-relaxed mb-4">
+
+            <p className="text-sm text-text-muted leading-relaxed mb-4 line-clamp-2">
                 {module.description}
             </p>
 
-            <div className="flex items-center justify-between">
-                <span className="text-xs text-slate-500">
-                    {module.lessonCount || 0} lessons
-                </span>
-                <span className="text-sm font-medium text-lumina-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
-                    Start
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
+            <div className="flex items-center justify-between text-sm text-text-muted">
+                <div className="flex -space-x-2">
+                    <div className="w-6 h-6 rounded-full bg-lumina-100 flex items-center justify-center text-[10px] font-bold text-lumina-600 border border-white">L</div>
+                    <div className="w-6 h-6 rounded-full bg-surface-muted flex items-center justify-center text-[10px] font-medium text-text-muted border border-white z-10">
+                        {module.lessonCount || 0}
+                    </div>
+                </div>
+                <span className="font-medium text-lumina-600 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
+                    Start Learning →
                 </span>
             </div>
         </Link>

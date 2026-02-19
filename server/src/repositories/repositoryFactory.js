@@ -14,16 +14,11 @@
  *   they never import a specific database implementation directly.
  * ============================================================================
  */
-const { db } = require('../config/firebase');
+const PostgresRepository = require('./PostgresRepository');
 
 function createRepository(collectionName) {
-    if (db) {
-        const FirebaseRepository = require('./firebaseRepository');
-        return new FirebaseRepository(collectionName);
-    }
-    // Fallback: in-memory store for demo / dev without Firebase
-    const InMemoryRepository = require('./inMemoryRepository');
-    return new InMemoryRepository(collectionName);
+    // The v2.0 pivot exclusively uses PostgreSQL
+    return new PostgresRepository(collectionName);
 }
 
 module.exports = { createRepository };
